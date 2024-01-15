@@ -8,3 +8,5 @@ streamlit.text('🥗 Kale, Spinack & Rocket Smoothie')
 streamlit.text('🐔 Hard-Boiled Free-Range Egg')
 streamlit.text('🥑🍞 Avocado Toast')
 # comment with all unique symbols used in section above: '🥣 🥗 🐔 🥑🍞'
+
+streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
