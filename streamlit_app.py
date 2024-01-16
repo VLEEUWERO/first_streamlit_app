@@ -51,19 +51,32 @@ st.write('The user entered ', fruit_choice)
 #don't run anything past here while we troubleshoot
 st.stop()
 
-#import snowflake.connector
-#test snowflake connection
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("select * from fruit_load_list")
-my_data_rows = my_cur.fetchall()
 st.header("The fruit load list contains:")
-st.dataframe(my_data_rows, hide_index=True)
+#Snowflake-related functions
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("select * from fruit_load_list")
+        return my_cur.fetchall()
+
+#Add a button to load the fruit
+if st.button('Get Fruit Load List'):
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    st.dataframe(my_data_rows, hide_index=True)
 
 #Allow the end user to add a fruit to the list
-add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("insert into fruit_load_list values ('" + new_fruit + "')")
+        return "Thanks for adding " + new_fruit
+        
+add_my_fruit = st.text_input('What fruit would you like to add?')
+if st.button('Add a Fruit to the List'):
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+    back_from_function = insert_row_snowflake(add_my_fruit)
+    st.text(back_from_function)
+    
 st.write('Thanks for adding ', add_my_fruit)
-
 
 #this will not work correctly, but just go with it for now
 my_cur.execute("insert into fruit_load_list values ('from st');")
