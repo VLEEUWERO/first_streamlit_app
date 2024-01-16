@@ -77,6 +77,3 @@ if st.button('Add a Fruit to the List'):
     st.text(back_from_function)
     
 st.write('Thanks for adding ', add_my_fruit)
-
-#this will not work correctly, but just go with it for now
-my_cur.execute("insert into fruit_load_list values ('from st');")
