@@ -49,8 +49,8 @@ except URLError as e:
 st.write('The user entered ', fruit_choice)
 
 
-#don't run anything past here while we troubleshoot
-#st.stop()
+#don't run anything past here because we DO NOT WANT TO ALLOW SQL INJECTION THROUGH THE APP
+st.stop()
 
 
 st.header("View Our Fruit List - Add Your Favorites!")
