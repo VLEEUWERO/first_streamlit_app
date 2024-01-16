@@ -49,7 +49,7 @@ except URLError as e:
 st.write('The user entered ', fruit_choice)
 
 #don't run anything past here while we troubleshoot
-st.stop()
+#st.stop()
 
 st.header("The fruit load list contains:")
 #Snowflake-related functions
